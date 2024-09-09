@@ -66,11 +66,13 @@ public class VendaService {
     }
 
     public Optional<Venda> findById(long id) {
-        if(this.vendaRepository.findById(id).isEmpty()){
+        Optional<Venda> venda = this.vendaRepository.findById(id);
+        if (venda.isEmpty()) {
             throw new RuntimeException("Venda nao encontrado: " + id);
         }
-        return this.vendaRepository.findById(id);
+        return venda;
     }
+
     public String deleteById(long id) {
         if(this.vendaRepository.findById(id).isEmpty()){
             throw new RuntimeException("Venda nao encontrado: " + id);

@@ -50,11 +50,14 @@ public class ProdutoService {
     }
 
     public Optional<Produto> findById(long id) {
-        if(this.produtoRepository.findById(id).isEmpty()){
+        Optional<Produto> produto = this.produtoRepository.findById(id); // Apenas uma chamada
+        if (produto.isEmpty()) {
             throw new RuntimeException("Produto nao encontrado: " + id);
         }
-        return this.produtoRepository.findById(id);
+        return produto;
     }
+
+
     public String deleteById(long id) {
         if(this.produtoRepository.findById(id).isEmpty()){
             throw new RuntimeException("Produto nao encontrado: " + id);
