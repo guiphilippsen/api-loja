@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > FuncionarioService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.guiphilipppsen.api_loja.service</a>
+</div>
+
+<h1>Coverage Summary for Class: FuncionarioService (com.github.guiphilipppsen.api_loja.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FuncionarioService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55,6%
+  </span>
+  <span class="absValue">
+    (10/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82,9%
+  </span>
+  <span class="absValue">
+    (34/41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.guiphilipppsen.api_loja.service;
+&nbsp;
+&nbsp;import com.github.guiphilipppsen.api_loja.Entities.Funcionario;
+&nbsp;import com.github.guiphilipppsen.api_loja.repositories.FuncionarioRepository;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class FuncionarioService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private FuncionarioRepository funcionarioRepository;
+&nbsp;
+&nbsp;    public String save(Funcionario funcionario) {
+<b class="fc">&nbsp;        this.funcionarioRepository.save(funcionario);</b>
+<b class="fc">&nbsp;        return &quot;Funcionario salvo&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String update(Funcionario funcionarioUpdate, long id) {
+<b class="fc">&nbsp;        Optional&lt;Funcionario&gt; funcionarioOptional =</b>
+<b class="fc">&nbsp;                this.funcionarioRepository.findById(id);</b>
+&nbsp;
+<b class="pc">&nbsp;        if (funcionarioOptional.isPresent()) {</b>
+<b class="fc">&nbsp;            Funcionario funcionario = funcionarioOptional.get();</b>
+<b class="fc">&nbsp;            funcionario.setNome(</b>
+<b class="pc">&nbsp;                    funcionarioUpdate.getNome() != null ?</b>
+<b class="fc">&nbsp;                            funcionarioUpdate.getNome() :</b>
+<b class="nc">&nbsp;                            funcionario.getNome()</b>
+&nbsp;            );
+<b class="fc">&nbsp;            funcionario.setIdade(</b>
+<b class="pc">&nbsp;                    funcionarioUpdate.getIdade() != 0 ?</b>
+<b class="fc">&nbsp;                            funcionarioUpdate.getIdade() :</b>
+<b class="nc">&nbsp;                            funcionario.getIdade()</b>
+&nbsp;            );
+<b class="fc">&nbsp;            funcionario.setEmail(</b>
+<b class="pc">&nbsp;                    funcionarioUpdate.getEmail() != null ?</b>
+<b class="nc">&nbsp;                            funcionarioUpdate.getEmail() :</b>
+<b class="fc">&nbsp;                            funcionario.getEmail()</b>
+&nbsp;            );
+<b class="fc">&nbsp;            funcionario.setEndereco(</b>
+<b class="pc">&nbsp;                    funcionarioUpdate.getEndereco() != null ?</b>
+<b class="nc">&nbsp;                            funcionarioUpdate.getEndereco() :</b>
+<b class="fc">&nbsp;                            funcionario.getEndereco()</b>
+&nbsp;            );
+<b class="fc">&nbsp;            funcionario.setTelefone(</b>
+<b class="pc">&nbsp;                    funcionarioUpdate.getTelefone() != null ?</b>
+<b class="nc">&nbsp;                            funcionarioUpdate.getTelefone() :</b>
+<b class="fc">&nbsp;                            funcionario.getTelefone()</b>
+&nbsp;            );
+<b class="fc">&nbsp;            funcionario.setFuncao(</b>
+<b class="pc">&nbsp;                    funcionarioUpdate.getFuncao() != null ?</b>
+<b class="nc">&nbsp;                            funcionarioUpdate.getFuncao() :</b>
+<b class="fc">&nbsp;                            funcionario.getFuncao()</b>
+&nbsp;            );
+<b class="fc">&nbsp;            this.funcionarioRepository.save(funcionario);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return &quot;Funcionario atualizado&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Funcionario&gt; findAll() {
+<b class="fc">&nbsp;        return this.funcionarioRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Optional&lt;Funcionario&gt; findById(long id) {
+<b class="pc">&nbsp;        if (this.funcionarioRepository.findById(id).isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new RuntimeException(&quot;Funcionario nao encontrado: &quot; + id);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return this.funcionarioRepository.findById(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String deleteById(long id) {
+<b class="fc">&nbsp;        if (this.funcionarioRepository.findById(id).isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new RuntimeException(&quot;Funcionario nao encontrado: &quot; + id);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.funcionarioRepository.deleteById(id);</b>
+<b class="fc">&nbsp;        return &quot;Funcionario removido&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-09 22:24</div>
+</div>
+</body>
+</html>

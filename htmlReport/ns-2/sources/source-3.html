@@ -1,0 +1,175 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ProdutoController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.guiphilipppsen.api_loja.controllers</a>
+</div>
+
+<h1>Coverage Summary for Class: ProdutoController (com.github.guiphilipppsen.api_loja.controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProdutoController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.guiphilipppsen.api_loja.controllers;
+&nbsp;
+&nbsp;import com.github.guiphilipppsen.api_loja.Entities.Produto;
+&nbsp;import com.github.guiphilipppsen.api_loja.service.ProdutoService;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.stereotype.Controller;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@Controller
+&nbsp;@RequestMapping(&quot;/app/produto&quot;)
+<b class="fc">&nbsp;public class ProdutoController {</b>
+&nbsp;    @Autowired
+&nbsp;    private ProdutoService produtoService;
+&nbsp;
+&nbsp;    @PostMapping(&quot;/save&quot;)
+&nbsp;    public ResponseEntity&lt;String&gt; save(@RequestBody Produto produto){
+&nbsp;        try {
+<b class="fc">&nbsp;            String result = this.produtoService.save(produto);</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(result, HttpStatus.OK);</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(</b>
+<b class="fc">&nbsp;                    &quot;Erro:&quot; + e.getMessage(),</b>
+&nbsp;                    HttpStatus.BAD_REQUEST);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @PutMapping(&quot;/update/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;String&gt; update(@RequestBody Produto produto, @PathVariable long id){
+&nbsp;        try {
+<b class="fc">&nbsp;            String mensagem = this.produtoService.update(produto, id);</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(mensagem, HttpStatus.OK);</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(&quot;Deu erro!&quot;+e.getMessage(), HttpStatus.BAD_REQUEST );</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/findById/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;Optional&lt;Produto&gt;&gt; findById(@PathVariable long id){
+&nbsp;        try {
+<b class="fc">&nbsp;            return ResponseEntity.status(HttpStatus.OK).body(produtoService.findById(id));</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(null, HttpStatus.BAD_REQUEST );</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/findAll&quot;)
+&nbsp;    public ResponseEntity&lt;List&lt;Produto&gt;&gt; findAll(){
+&nbsp;        try {
+<b class="fc">&nbsp;            List&lt;Produto&gt; lista = this.produtoService.findAll();</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(lista, HttpStatus.OK);</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(null, HttpStatus.BAD_REQUEST );</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @DeleteMapping(&quot;/delete/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;String&gt; delete(@PathVariable long id){
+&nbsp;        try {
+<b class="fc">&nbsp;            String mensagem = this.produtoService.deleteById(id);</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(mensagem, HttpStatus.OK);</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            return new ResponseEntity&lt;&gt;(null, HttpStatus.BAD_REQUEST );</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-09 22:24</div>
+</div>
+</body>
+</html>

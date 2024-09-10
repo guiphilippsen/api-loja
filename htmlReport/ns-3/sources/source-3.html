@@ -1,0 +1,184 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ProdutoService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.github.guiphilipppsen.api_loja.service</a>
+</div>
+
+<h1>Coverage Summary for Class: ProdutoService (com.github.guiphilipppsen.api_loja.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProdutoService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66,7%
+  </span>
+  <span class="absValue">
+    (8/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (27/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.github.guiphilipppsen.api_loja.service;
+&nbsp;
+&nbsp;
+&nbsp;import com.github.guiphilipppsen.api_loja.Entities.Produto;
+&nbsp;import com.github.guiphilipppsen.api_loja.repositories.ProdutoRepository;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class ProdutoService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private ProdutoRepository produtoRepository;
+&nbsp;
+&nbsp;    public String save(Produto produto){
+<b class="fc">&nbsp;        this.produtoRepository.save(produto);</b>
+<b class="fc">&nbsp;        return &quot;Produto salvo&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String update(Produto produtoUpdate, long id) {
+<b class="fc">&nbsp;        Optional&lt;Produto&gt; produtoOptional =</b>
+<b class="fc">&nbsp;                this.produtoRepository.findById(id);</b>
+&nbsp;
+<b class="pc">&nbsp;        if(produtoOptional.isPresent()) {</b>
+<b class="fc">&nbsp;            Produto produto = produtoOptional.get();</b>
+<b class="fc">&nbsp;            produto.setNome(</b>
+<b class="pc">&nbsp;                    produtoUpdate.getNome() != null ?</b>
+<b class="fc">&nbsp;                            produtoUpdate.getNome() :</b>
+<b class="nc">&nbsp;                            produto.getNome()</b>
+&nbsp;            );
+<b class="fc">&nbsp;            produto.setDescricao(</b>
+<b class="pc">&nbsp;                    produtoUpdate.getDescricao() != null ?</b>
+<b class="fc">&nbsp;                            produtoUpdate.getDescricao() :</b>
+<b class="nc">&nbsp;                            produto.getDescricao()</b>
+&nbsp;            );
+<b class="fc">&nbsp;            produto.setPreco(</b>
+<b class="pc">&nbsp;                    produtoUpdate.getPreco() != 0 ?</b>
+<b class="fc">&nbsp;                            produtoUpdate.getPreco() :</b>
+<b class="nc">&nbsp;                            produto.getPreco()</b>
+&nbsp;            );
+<b class="fc">&nbsp;            this.produtoRepository.save(produto);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return &quot;Produto atualizado&quot;;</b>
+&nbsp;    }
+&nbsp;    public List&lt;Produto&gt; findAll() {
+<b class="fc">&nbsp;        return this.produtoRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Optional&lt;Produto&gt; findById(long id) {
+<b class="fc">&nbsp;        Optional&lt;Produto&gt; produto = this.produtoRepository.findById(id); // Apenas uma chamada</b>
+<b class="fc">&nbsp;        if (produto.isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new RuntimeException(&quot;Produto nao encontrado: &quot; + id);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return produto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public String deleteById(long id) {
+<b class="fc">&nbsp;        if(this.produtoRepository.findById(id).isEmpty()){</b>
+<b class="fc">&nbsp;            throw new RuntimeException(&quot;Produto nao encontrado: &quot; + id);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.produtoRepository.deleteById(id);</b>
+<b class="fc">&nbsp;        return &quot;Produto removido&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-09 22:24</div>
+</div>
+</body>
+</html>
